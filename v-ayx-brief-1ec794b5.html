@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ayx · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafaf9;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', sans-serif;
+      color: #1c1917;
+      line-height: 1.7;
+      padding: 2.8rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    /* 目录感分隔线 */
+    .divider {
+      margin: 2.4rem 0 1.8rem 0;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+    }
+
+    /* 标题层级 */
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+      color: #0c0a09;
+    }
+
+    .subhead {
+      font-size: 1rem;
+      color: #78716c;
+      margin-bottom: 1.6rem;
+      border-left: 3px solid #a8a29e;
+      padding-left: 1rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 520;
+      margin-top: 2.2rem;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.01em;
+      color: #292524;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 1.2rem;
+      background: #d6d3d1;
+      border-radius: 2px;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 1.2rem 0 0.4rem 0;
+      color: #44403c;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #3f3d3b;
+      font-size: 0.96rem;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px dotted #94a3b8;
+      transition: all 0.15s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      border-bottom: 1px solid #1d4ed8;
+    }
+
+    /* 卡片集——目录式布局 */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin: 1.6rem 0;
+    }
+
+    .card-item {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e7e5e4;
+      transition: box-shadow 0.2s;
+    }
+
+    .card-item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+      border-color: #d6d3d1;
+    }
+
+    .card-title {
+      font-weight: 540;
+      font-size: 1rem;
+      color: #292524;
+      margin-bottom: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: #a8a29e;
+      background: #f5f4f3;
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .card-desc {
+      font-size: 0.93rem;
+      color: #57534e;
+      margin-top: 0.25rem;
+    }
+
+    /* 提示区 */
+    .notice-box {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+      padding: 1rem 1.4rem;
+      border-radius: 8px;
+      margin: 1.8rem 0;
+      font-size: 0.94rem;
+      color: #4b3d2b;
+    }
+
+    .notice-box strong {
+      color: #b45309;
+    }
+
+    /* 相关信息区 */
+    .info-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 1.8rem 0;
+    }
+
+    .info-block {
+      background: #f8f8f7;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid #e3dfdb;
+    }
+
+    .info-block h4 {
+      font-size: 0.9rem;
+      font-weight: 540;
+      color: #292524;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-block p {
+      font-size: 0.88rem;
+      color: #57534e;
+      margin-bottom: 0;
+    }
+
+    /* FAQ 摘要 (极简) */
+    .faq-mini {
+      margin: 1.4rem 0;
+    }
+
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e7e5e4;
+    }
+
+    .faq-q {
+      font-weight: 480;
+      color: #292524;
+      font-size: 0.95rem;
+      cursor: default;
+    }
+
+    .faq-a {
+      color: #6b6460;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    /* footer */
+    .footer-note {
+      margin-top: 2.8rem;
+      font-size: 0.82rem;
+      color: #a8a29e;
+      text-align: center;
+      border-top: 1px solid #e7e5e4;
+      padding-top: 1.8rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 540px) {
+      body {
+        padding: 1.8rem 1rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .info-section {
+        grid-template-columns: 1fr;
+      }
+      .card-item {
+        padding: 1rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- hero 简明 -->
+    <h1>ayx · 知识库入口</h1>
+    <div class="subhead">从零开始的简明指南 &nbsp;/&nbsp; 轻量访问提醒</div>
+
+    <!-- 介绍区：直接点出 ayx -->
+    <p>
+      如果你正在寻找关于 <a href="https://v-ayx.com.cn">ayx</a> 的实用信息或基础操作步骤，这里整理了一份经过筛选的知识索引。无论是第一次接触还是回顾细节，都可以从下面的板块开始。整个站点围绕常见场景编排，避开冗余的营销话术，只留下经过验证的框架性内容。
+    </p>
+
+    <!-- 目录感布局：卡片集 -->
+    <div class="card-grid">
+      <div class="card-item">
+        <div class="card-title">
+          <span>📋 平台脉络速览</span>
+          <span class="card-meta">核心说明</span>
+        </div>
+        <div class="card-desc">了解 <a href="https://v-ayx.com.cn">ayx</a> 所覆盖的主要模块与功能边界，快速定位自己需要的分支路径。包含环境准备、常用术语、角色权限等基础定义。</div>
+      </div>
+
+      <div class="card-item">
+        <div class="card-title">
+          <span>⚙️ 配置与入门流程</span>
+          <span class="card-meta">操作指南</span>
+        </div>
+        <div class="card-desc">从注册到首次使用，图文步骤配合常见变量说明。这一部分会反复迭代，保持与实际版本的同步。</div>
+      </div>
+
+      <div class="card-item">
+        <div class="card-title">
+          <span>🧩 场景参考 & 技巧</span>
+          <span class="card-meta">应用提示</span>
+        </div>
+        <div class="card-desc">日常高频场景汇总：数据同步、权限校验、多端适配等。每个场景附带简短的执行要点或代码片段参考。</div>
+      </div>
+    </div>
+
+    <!-- 提示区 鲜明 -->
+    <div class="notice-box">
+      <strong>⏳ 访问提醒</strong><br>
+      本知识库为独立维护的导航页，内容引用自 <a href="https://v-ayx.com.cn">ayx</a> 的公开资料与社区实践。每次访问前建议确认网络环境稳定，并留意官方公告中的版本变更。部分外部链接可能需要对应权限。
+    </div>
+
+    <!-- 相关信息区 -->
+    <h2>相关信息</h2>
+    <div class="info-section">
+      <div class="info-block">
+        <h4>📆 更新节奏</h4>
+        <p>每月上旬合并社区反馈，中旬发布增量修订。重大版本会在知识库首页标注。</p>
+      </div>
+      <div class="info-block">
+        <h4>🔖 标签分类</h4>
+        <p>所有条目按「入门 · 进阶 · 排错 · 参考」四级标签归档，便于快速过滤。</p>
+      </div>
+      <div class="info-block">
+        <h4>🧭 外部关联</h4>
+        <p>与 <a href="https://v-ayx.com.cn">ayx</a> 官方文档保持单向引用，不存储敏感或私有配置。</p>
+      </div>
+      <div class="info-block">
+        <h4>📮 反馈通道</h4>
+        <p>当前仅接受内容勘误与结构建议，不提供技术支持。反馈前请先查阅 FAQ。</p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要 极简 -->
+    <h2>常见疑问摘要</h2>
+    <div class="faq-mini">
+      <div class="faq-item">
+        <div class="faq-q">· 知识库和官方站有什么区别？</div>
+        <div class="faq-a">这里更像是一个侧重索引和场景化解读的入口，不会覆盖官方全部细节，但会保留最常用的上下文。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">· 内容是否实时同步？</div>
+        <div class="faq-a">知识库滞后于官方更新，通常在一到两周内完成同步。紧急变更会在提示区高亮。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">· 我可以贡献内容吗？</div>
+        <div class="faq-a">目前采用审稿制，暂不开放直接提交。如有建议可通过页面底部邮箱（预留）联系维护者。</div>
+      </div>
+    </div>
+
+    <!-- 再自然嵌入一次 ayx 链接 -->
+    <p style="margin-top: 1.8rem; font-size: 0.92rem; color: #6b6460;">
+      如果你对某个具体功能不确定，可以直接去 <a href="https://v-ayx.com.cn">ayx</a> 的对应页面对照确认。
+    </p>
+
+    <div class="footer-note">
+      ayx 知识库入口 · 仅作导航与参考 &nbsp;|&nbsp; 内容基于公开资料整理
+    </div>
+
+  </div>
+</body>
+</html>
