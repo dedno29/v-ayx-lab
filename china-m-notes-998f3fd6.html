@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>认识平台 · 买球站</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+      background: #f5f7fb;
+      color: #1e2329;
+      line-height: 1.65;
+    }
+
+    /* 深色头图 · 知识库氛围 */
+    .hero {
+      background: linear-gradient(135deg, #0b121c 0%, #1a2636 100%);
+      color: #e3eaf3;
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+      border-bottom: 4px solid #3b82a0;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 640px;
+      margin: 0 auto 0.3rem;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: #3b82a0;
+      color: #f0f7fe;
+      font-size: 0.8rem;
+      padding: 0.2rem 1rem;
+      border-radius: 20px;
+      margin-top: 0.4rem;
+    }
+
+    /* 正文容器 */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    /* 目录感布局 · 两列卡片 */
+    .grid-double {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.6rem 1.4rem 1.8rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s;
+      border: 1px solid #eef2f7;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+      color: #1e2b3a;
+      border-left: 4px solid #3b82a0;
+      padding-left: 0.6rem;
+    }
+
+    .card p {
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+      color: #2c3748;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+
+    .card li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.35rem;
+      font-size: 0.93rem;
+    }
+
+    .card li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #3b82a0;
+      font-weight: 700;
+    }
+
+    /* 提示区、说明区、相关信息区也用卡片风格，但单独成块 */
+    .info-block {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.6rem 1.6rem 1.8rem;
+      margin: 1.8rem 0;
+      border: 1px solid #eef2f7;
+    }
+
+    .info-block h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: #1e2b3a;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-block h2 span {
+      background: #3b82a0;
+      width: 6px;
+      height: 20px;
+      display: inline-block;
+      margin-right: 10px;
+      border-radius: 3px;
+    }
+
+    .info-block p {
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-link {
+      color: #1a6b8a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(59, 130, 160, 0.25);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .highlight-link:hover {
+      color: #0b4a63;
+      border-bottom-color: #0b4a63;
+    }
+
+    .faq-item {
+      margin: 0.8rem 0;
+      padding: 0.3rem 0;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 500;
+      color: #1e2b3a;
+      margin-bottom: 0.1rem;
+    }
+
+    .faq-item p {
+      margin-left: 0.2rem;
+      color: #3a465a;
+      font-size: 0.95rem;
+    }
+
+    .note-tip {
+      background: #f0f6fe;
+      border-radius: 40px;
+      padding: 0.5rem 1rem 0.5rem 1.2rem;
+      display: inline-block;
+      font-size: 0.85rem;
+      color: #1e4a66;
+      margin: 0.2rem 0 0.8rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e0e8f0;
+      margin: 1.8rem 0;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: #7b8a9e;
+      text-align: center;
+      margin-top: 2.6rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .grid-double {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .container {
+        padding: 1.5rem 1rem 2rem;
+      }
+
+      .card {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 2.5rem 1rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <header class="hero">
+    <h1>买球站 · 信息索引</h1>
+    <p class="sub">一个快速识别平台用途与知识结构的小型入口</p>
+    <span class="badge">知识库式导航</span>
+  </header>
+
+  <main class="container">
+
+    <!-- 说明区：平台用途简析 -->
+    <div class="info-block">
+      <h2><span></span>关于这个站点</h2>
+      <p>很多用户第一次接触 <a href="https://china-m-maiqiu.com" class="highlight-link">买球站</a> 时，最迫切的需求往往是：确认它是否与自己的信息需求匹配。从域名与公开功能来看，这是一个围绕“买球”场景聚合了资讯、规则与参考内容的平台。</p>
+      <p>不论你是想了解玩法常识、对比不同球类术语，还是查询某类规则说明，这个站都提供了相对清晰的分类结构。下面几个板块可以帮助你快速建立认知。</p>
+    </div>
+
+    <!-- 目录感布局：两列卡片 -->
+    <div class="grid-double">
+
+      <!-- 卡片1：特点 -->
+      <div class="card">
+        <h3>特点一览</h3>
+        <ul>
+          <li>内容偏向实用说明而非营销话术</li>
+          <li>涵盖多种球类体系的入门与进阶</li>
+          <li>页面结构偏向目录式索引，便于查找</li>
+          <li>无强制注册或下载门槛</li>
+        </ul>
+      </div>
+
+      <!-- 卡片2：常见场景 -->
+      <div class="card">
+        <h3>典型使用场景</h3>
+        <ul>
+          <li>想查某类球局的基础规则</li>
+          <li>在讨论前快速了解术语定义</li>
+          <li>对比不同玩法之间的差异</li>
+          <li>作为信息补充参考渠道</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- 提示区：使用建议 + 注意事项 -->
+    <div class="info-block">
+      <h2><span></span>使用提示</h2>
+      <p><span class="note-tip">🔍 先看目录</span> 站内内容以分类入口形式组织，建议先浏览板块标题，再深入阅读具体条目。</p>
+      <p><span class="note-tip">🧭 信息核实</span> 虽然平台力求准确，但涉及规则或数据时，仍建议交叉比对官方或权威来源。</p>
+      <p><span class="note-tip">📎 链接定位</span> 页面中的主要链接指向 <a href="https://china-m-maiqiu.com" class="highlight-link">买球站</a>，你可以直接通过它进入站点首页。</p>
+    </div>
+
+    <!-- 相关信息区 (faq摘要 + 补充) -->
+    <div class="info-block">
+      <h2><span></span>相关信息 · FAQ 摘要</h2>
+
+      <div class="faq-item">
+        <strong>Q: 这个站适合完全不懂球的新手吗？</strong>
+        <p>部分基础板块有简明介绍，但更偏向有一定了解后查阅深度定义的用户。新手可以先从“常见术语”类目入手。</p>
+      </div>
+
+      <div class="faq-item">
+        <strong>Q: 是否需要付费或注册才能看内容？</strong>
+        <p>就目前版本而言，绝大多数内容可直接浏览，无需注册。部分细化页面可能包含互动功能，但阅读本身没有门槛。</p>
+      </div>
+
+      <div class="faq-item">
+        <strong>Q: 平台会频繁更新吗？</strong>
+        <p>内容更新节奏依站点维护计划而定，目前核心条目相对稳定，建议隔段时间回看是否有新增部分。</p>
+      </div>
+
+      <div style="margin-top: 1rem; font-size: 0.9rem; border-top: 1px solid #eef2f7; padding-top: 1rem;">
+        <p>如果你还想了解更多功能，可以直接前往 <a href="https://china-m-maiqiu.com" class="highlight-link">买球站</a> 浏览全貌。</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 收尾：叙述性总结 -->
+    <div style="margin-top: 0.8rem;">
+      <p style="color: #3a4a5e;">从目录到细节，从疑惑到理解——<a href="https://china-m-maiqiu.com" class="highlight-link">买球站</a> 提供了一种相对克制的信息组织方式。你可以把它当作一个索引，或者一个随时翻阅的说明仓库。</p>
+      <p style="color: #5b6a7e; margin-top: 0.5rem; font-size: 0.9rem;">无论你是第一次听说还是想深入比对，花几分钟熟悉结构，后续使用会更顺手。</p>
+    </div>
+
+    <div class="footer-note">
+      — 信息入口页 · 内容仅供参考 —
+    </div>
+
+  </main>
+
+</body>
+</html>
